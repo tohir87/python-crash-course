@@ -1,22 +1,32 @@
 #!/usr/bin/env python
-# coding: utf-8
+# Student Name: ***** ********
+# Student Number: *******
 
-# In[6]:
 
-
-# Method to compute by lbs
+# Method to compute BMI by imprerial unit
 def computeByLbs():
+    # request for user weight
     weight = input("What is your weight (lbs): ")
+    # request for user height
     height = input("What is your height: (inches) ")
+    # calculate the bmi using the imperial formula
     bmi =  (float(weight)/pow(float(height), 2)) * 703 
+    print(f'Your weight is: {weight} lbs')
+    print(f'Your height is: {height} inches')
     return bmi
 
 
-# Method to compute by kg
+# Method to compute by metric Unit
 def computeByKg():
+    # request for user weight
     weight = input("What is your weight (kg): ")
+    # request for user height
     height = input("What is your height: (m) ")
+    # calculate the bmi using the metric formula
     bmi =  float(weight)/pow(float(height), 2) 
+    # print the weight adn height on the screen
+    print(f'Your weight is: {weight} kg')
+    print(f'Your height is: {height} m')
     return bmi
 
 #ask user for which method
@@ -38,7 +48,7 @@ else:
     category = "Normal"
         
 # print out the BMI
-print("your BMI is: ", bmi)
+print(f'your BMI is: {bmi:.2f}')
 print("WHO category: ", category)
 
 
