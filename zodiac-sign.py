@@ -37,7 +37,12 @@ def zodiacSign(birthDay, birthMonth):
     elif ( (birthMonth == "12" and int(birthDay) >= 22) or (birthMonth == "01" and int(birthDay) <= 19) ):
         sign = "Capricorn"
 
-    return sign;
+    return sign
+
+#Function to determine what key would be used for sorting
+# index 0(uid) of the list would be used to sort the user list
+def sortByUid(list):
+    return list[0]
 
 
 userList = [] # Initialize user list array
@@ -69,6 +74,9 @@ while terminate == 0:
     except ValueError:
         print('You have entered an invalid User ID')
 
+#sort User list by UserID
+userList.sort(key=sortByUid)
+
 #display all user in table format
 print("UID\t Name\t D.o.b\t Age\t Western Zodiac\n")
 for u in userList:
@@ -79,3 +87,4 @@ for u in userList:
     uSign   = u[4]
     
     print(f'{uId:2d}  {uName:10} {uDob:12} {uAge:5} {uSign:15}')
+    
