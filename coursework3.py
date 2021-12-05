@@ -50,32 +50,34 @@ def main():
     userList = [] # Initialize user list array
     terminate = 0 # Initiase terminate, the progam will keep runing until terminate is set to 1
 
-    while terminate == 0:
-        try:
-            userId = input("Please enter your USER ID(2 digit number):")
-            if userId == "end":
-                break
-            uId = int(userId)
-            name   = input("Please enter your name:")
-            dob    = input("Please enter your date of birth(DD/MM/YYYY):")
-        
-            #split the date of birth to extract the month, day and year
-            splited    = dob.split('/')
-            day   = splited[0]
-            month = splited[1]
-            year  = splited[2]
-            #todo: implement some validation logic for date of birth
+    #Read input from text file
+    userData = open("UserData.txt", "r")
+    for line in userData:
+        #split line by tab space
+        userArray = line.split()
+        if userArray[0] == 'UID':
+            continue
+        uId = userArray[0]
+        name = userArray[1] + ' ' + userArray[2]
+        dob = userArray[3]
+        print(userArray)
+            
+        #split the date of birth to extract the month, day and year
+        splited    = dob.split('-')
+        day   = splited[2]
+        month = splited[1]
+        year  = splited[0]
 
-            #calculate the age of the user
-            userAge    = age(int(day), int(month), int(year))
-            #get Zodiac Sign
-            sign = wt_zodiac(day, month)
-            cnZodiac = cn_zodiac(year)
+        #calculate the age of the user
+        userAge    = age(int(day), int(month), int(year))
+        #get Zodiac Sign
+        sign = wt_zodiac(day, month)
+        #get the chinese zodiac sign
+        cnZodiac = cn_zodiac(year)
 
-            # Push user information into user list array
-            userList.append( [uId, name, dob, userAge, sign, cnZodiac]);
-        except ValueError:
-            print('You have entered an invalid User ID')
+        # Push user information into user list array
+        userList.append( [uId, name, dob, userAge, sign, cnZodiac]);
+
 
     #display all user in table format
     print("UID\t Name\t D.o.b\t Age\t Western Zodiac\t Chinese Zodiac\n")
@@ -86,7 +88,7 @@ def main():
         uAge    = u[3]
         uSign   = u[4]
         cnSign   = u[5]
-        print(f'{uId:2d}  {uName:10} {uDob:12} {uAge:5} {uSign:15} {cnSign:15}')
+        print(f'{uId:2}  {uName:10} {uDob:12} {uAge:5} {uSign:15} {cnSign:15}')
 
 if __name__ == "__main__":
     main()
