@@ -68,13 +68,21 @@ def cn_zodiac(birth_year):
 
     return zodiac_animal;
 
+#Function to determine what key would be used for sorting
+# index 0(uid) of the list would be used to sort the user list
+def sortByName(list):
+    return list[1]
 
 def writeToFile(userList):
+    #sort User list by Name
+    userList.sort(key=sortByName)
+
     f = open("zodiac.txt", "w")
 
     #Write all user in table format in a txt file
     print("Writing user data to zodiac.txt")
-    f.write("UID\t Name\t D.o.b\t Age\t Western Zodiac\t Chinese Zodiac\n")
+    print("UID\t Name\t\t D.o.b\t\t Age\t Western Zodiac\t Chinese Zodiac")
+    f.write("UID\t Name\t\t D.o.b\t\t Age\t Western Zodiac\t Chinese Zodiac\n")
     for u in userList:
         uId     = u[0]
         uName   = u[1]
@@ -82,7 +90,8 @@ def writeToFile(userList):
         uAge    = u[3]
         uSign   = u[4]
         cnSign   = u[5]
-        f.write(f'{uId:2}  {uName:10} {uDob:12} {uAge:5} {uSign:15} {cnSign:15}')
+        print(f'{uId:2}  {uName:20} {uDob:10} {uAge:10} {uSign:20} {cnSign:15}')
+        f.write(f'{uId:2}  {uName:20} {uDob:10} {uAge:10} {uSign:20} {cnSign:15}')
         f.write("\n")
 
     f.close()
@@ -97,6 +106,7 @@ def main():
     #Read input from text file
     print("\nReading data from userData.txt file")
     userData = open("UserData.txt", "r")
+    print ("processing...")
     for line in userData:
         #split line by tab space
         userArray = line.split()
@@ -121,7 +131,6 @@ def main():
 
         # Push user information into user list array
         userList.append( [uId, name, dob, userAge, sign, cnZodiac])
-        print ("processing...")
 
     writeToFile(userList) # call the function to write the result to file
 
